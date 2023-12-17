@@ -1,4 +1,5 @@
 import React from 'react'
+import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup"
@@ -11,14 +12,18 @@ const schema = yup
     })
     .required()
 
-const Index = () => {
+const Login = () => {
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({resolver: yupResolver(schema)})
-    const onSubmit = (data) => console.log(data)
-
+    const onSubmit = (data) => {
+        console.log(data)
+        localStorage.setItem('userEmail', data.email);
+        navigate('/')
+    }
 
     return <div>
         <h1>Login</h1>
@@ -36,4 +41,4 @@ const Index = () => {
     </div>
 }
 
-export default Index
+export default Login
