@@ -7,8 +7,8 @@ import Form from "../../components/Form";
 
 const schema = yup
     .object({
-        email: yup.string().required(),
-        password: yup.string().required(),
+        email: yup.string().email('Enter a valid email').required(),
+        password: yup.string().min(3, 'Password must contain at least 3 characters').required(),
     })
     .required()
 
@@ -29,12 +29,12 @@ const Login = () => {
         <h1>Login</h1>
             <Form handleSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor='email'>Email</label>
-                <input id='email' {...register("email")} type='email' autoComplete='off'/>
+                <input id='email' placeholder='email' {...register("email")} type='email' autoComplete='off'/>
                 {errors.email?.message}
 
                 <label htmlFor='password'>Password</label>
-                <input id='password' {...register("password")}  type='password' autoComplete='new-password'/>
-                {errors.password && <span>This field is required</span>}
+                <input id='password' placeholder='password' {...register("password")}  type='password' autoComplete='new-password'/>
+                {errors.password?.message}
 
                 <input type="submit" />
             </Form>
