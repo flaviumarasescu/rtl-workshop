@@ -9,7 +9,7 @@ const config = {
     '^.+\\.js$': 'babel-jest'
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom', './jest.setup.js'],
-  collectCoverageFrom: ['src/client/**/*.js'],
+  collectCoverageFrom: ['src/**/*.js'],
   coverageThreshold: {
     global: {
       statements: 20,

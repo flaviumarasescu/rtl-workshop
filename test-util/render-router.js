@@ -1,5 +1,5 @@
 import React, {cloneElement, isValidElement} from 'react'
-import {render, waitFor,screen} from '@testing-library/react'
+import {render, screen, waitForElementToBeRemoved} from '@testing-library/react'
 import { RouterProvider, createMemoryRouter } from 'react-router'
 
 export const renderWithRouter = (children, routes = [], ui, provider) => {
@@ -14,7 +14,7 @@ export const renderWithRouter = (children, routes = [], ui, provider) => {
 
     const wrappedUi = provider ? cloneElement(provider, {}, ui) : ui
 
-    const finishLoading = () => waitFor(() => expect(screen.queryByTestId('spinner')).not.toBeInTheDocument())
+    const finishLoading = () => waitForElementToBeRemoved(() => screen.queryByTestId('spinner'))
 
     const utils = render(<RouterProvider router={router}>
         {wrappedUi}
